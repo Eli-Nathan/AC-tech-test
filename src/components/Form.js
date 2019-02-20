@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      vehiclePrice: null,
+      deposit: null,
+      date: null,
+      termLength: null,
+      depositError: "ch-form__group"
+    }
+  }
+
   changeTerm = (value) => {
     this.setState({
       termLength: value
@@ -9,13 +20,21 @@ class Form extends Component {
 
   calculateLoan = () => {
     let price = document.getElementById("price").value;
-    let desposit = document.getElementById("deposit").value;
+    let deposit = document.getElementById("deposit").value;
     let deliveryDate = document.getElementById("deliveryDate").value;
-    let term = this.state.termLength;
-    console.log(price);
-    console.log(desposit);
-    console.log(deliveryDate);
-    console.log(term);
+    if(deposit >= ((15 / 100 ) * price)) {
+      this.setState({
+        price: price,
+        deposit: deposit,
+        date: deliveryDate,
+        depositError: "ch-form__group"
+      })
+    }
+    else {
+      this.setState({
+        depositError: "ch-form__group ch-form__group--error"
+      })
+    }
   }
 
   render() {
@@ -33,12 +52,13 @@ class Form extends Component {
               type="number"
               id="price" />
           </div>
-          <div className="ch-form__group">
+          <div className={this.state.depositError}>
             <label
               htmlFor="deposit"
               className="ch-form__control-label">
               Desposit amount (£)
             </label>
+            <span className="ch-form__control-validation">Deposit must be at least 15% of the vehicle price</span>
             <input
               className="ch-form__control"
               type="number"

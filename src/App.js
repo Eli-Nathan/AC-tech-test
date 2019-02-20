@@ -4,15 +4,6 @@ import './App.scss';
 import Form from './components/Form.js';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      vehiclePrice: null,
-      deposit: null,
-      date: null,
-      termLength: null
-    }
-  }
 
   render() {
     return (
