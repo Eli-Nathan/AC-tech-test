@@ -11,6 +11,8 @@ class App extends Component {
       deposit: null,
       date: null,
       formSubmitted: false,
+      arrangementFee: 88,
+      completionFee: 20,
       termLength: null,
       depositError: "ch-form__group"
     }
@@ -26,17 +28,24 @@ class App extends Component {
     let price = document.getElementById("price").value;
     let deposit = document.getElementById("deposit").value;
     let deliveryDate = document.getElementById("deliveryDate").valueAsDate
+    let arrangement = parseInt(document.getElementById("arrangement").value)
+    let completion = parseInt(document.getElementById("completion").value)
+    deliveryDate == undefined ? deliveryDate = new Date() : deliveryDate = deliveryDate
     if(deposit >= ((15 / 100 ) * price)) {
       this.setState({
         price: price,
         deposit: deposit,
         date: deliveryDate,
         depositError: "ch-form__group",
+        arrangementFee: arrangement,
+        completionFee: completion,
         formSubmitted: true
-      })
+      }, () => console.log(this.state.arrangementFee))
     }
     else {
       this.setState({
+        price: price,
+        date: new Date(),
         depositError: "ch-form__group ch-form__group--error"
       })
     }
@@ -49,11 +58,10 @@ class App extends Component {
     let deliveryDate = new Date(date)
     // Get current month and add 1
     let firstPaymentDate = new Date(date.getFullYear(), date.getMonth() + 1)
-    firstPaymentDate = firstPaymentDate.setDate(firstPaymentDate.getDate() + (nextMonday+(7-firstPaymentDate.getDay())) % 7)
+    firstPaymentDate = firstPaymentDate.setDate(firstPaymentDate.getDate() + (nextMonday+(7 - firstPaymentDate.getDay())) % 7)
     for(let i = 0; i < monthsToPay; i++) {
-      console.log(i);
       eachDate = new Date(date.getFullYear(), date.getMonth() + (1 * (i+1)))
-      eachDate = new Date(eachDate.setDate(eachDate.getDate() + (nextMonday+(7-eachDate.getDay())) % 7))
+      eachDate = new Date(eachDate.setDate(eachDate.getDate() + (nextMonday+(7 - eachDate.getDay())) % 7))
       allPaymentDates.push(
         {
           date: eachDate,
@@ -62,9 +70,9 @@ class App extends Component {
       )
     }
     // Add 88 initial payment to first date
-    allPaymentDates[0].payment = allPaymentDates[0].payment + 88;
+    allPaymentDates[0].payment = allPaymentDates[0].payment + this.state.arrangementFee;
     // Add 20 settlement payment to last date
-    allPaymentDates[allPaymentDates.length -1].payment = allPaymentDates[allPaymentDates.length -1].payment + 20;
+    allPaymentDates[allPaymentDates.length -1].payment = allPaymentDates[allPaymentDates.length -1].payment + this.state.completionFee;
     return allPaymentDates
   }
 
@@ -105,7 +113,7 @@ class App extends Component {
                 className="ch-form__control-label">
                 Desposit amount (£)
               </label>
-              <span className="ch-form__control-validation">Deposit must be at least 15% of the vehicle price</span>
+              <span className="ch-form__control-validation">{`Deposit must be at least 15% of the vehicle price, i.e. £${(15 / 100 ) * this.state.price}`}</span>
               <input
                 className="ch-form__control"
                 type="number"
@@ -121,6 +129,30 @@ class App extends Component {
                 className="ch-form__control"
                 type="date"
                 id="deliveryDate" />
+            </div>
+            <div className="ch-form__group ch-display--inline-block ch-mr--2">
+              <label
+                htmlFor="arrangement"
+                className="ch-form__control-label">
+                Arrangement fee (£)
+              </label>
+              <input
+                className="ch-form__control"
+                type="number"
+                id="arrangement"
+                defaultValue={88} />
+            </div>
+            <div className="ch-form__group ch-display--inline-block">
+              <label
+                htmlFor="completion"
+                className="ch-form__control-label">
+                Completion fee (£)
+              </label>
+              <input
+                className="ch-form__control"
+                type="number"
+                id="completion"
+                defaultValue={20} />
             </div>
             <div className="ch-form__group">
               <h5 className="ch-mb--1">Finance term</h5>
