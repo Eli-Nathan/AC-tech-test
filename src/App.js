@@ -44,18 +44,19 @@ class App extends Component {
 
   getMondays = (date, nextMonday) => {
     let deliveryDate = new Date(date)
-    let endDate = new Date(date.setFullYear(date.getFullYear() + this.state.termLength))
+    // let endDate = new Date(date.setFullYear(date.getFullYear() + this.state.termLength))
     let allPaymentDates = []
+    let eachDate
     deliveryDate = deliveryDate.setDate(deliveryDate.getDate() + (nextMonday+(7-deliveryDate.getDay())) % 7)
-    endDate = endDate.setDate(endDate.getDate() + (nextMonday+(7-endDate.getDay())) % 7)
-    deliveryDate = moment(deliveryDate, "YYYY-MM-DD").format("Do MMM YYYY")
-    endDate = moment(endDate, "YYYY-MM-DD").format("Do MMM YYYY")
-    console.log(deliveryDate);
-    console.log(endDate);
+    // endDate = endDate.setDate(endDate.getDate() + (nextMonday+(7-endDate.getDay())) % 7)
+
+    // endDate = moment(endDate).format("Do MMM YYYY")
     for(let i = 0; i < this.state.termLength*52; i++) {
+      eachDate = new Date(deliveryDate)
+      eachDate.setDate(eachDate.getDate() + (7 * i))
       allPaymentDates.push(
         {
-          date: moment(deliveryDate, "YYYY-MM-DD").add(1, 'week').format("Do MMM YYYY"),
+          date: eachDate,
           payment: 50
         }
       )
@@ -65,10 +66,11 @@ class App extends Component {
   }
 
   renderSchedule = () => {
+    let firstDate = new Date(this.getMondays(this.state.date, 1))
     return (
       <div>
         <h2>Payment Schedule</h2>
-        <h3>{`First payment date is: ${this.getMondays(this.state.date, 1)}`}</h3>
+        <h3>{`First payment date is: ${firstDate}`}</h3>
       </div>
     )
   }
