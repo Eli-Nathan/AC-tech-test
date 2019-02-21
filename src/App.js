@@ -30,7 +30,7 @@ class App extends Component {
     let deliveryDate = document.getElementById("deliveryDate").valueAsDate
     let arrangement = parseInt(document.getElementById("arrangement").value)
     let completion = parseInt(document.getElementById("completion").value)
-    deliveryDate == undefined ? deliveryDate = new Date() : deliveryDate = deliveryDate
+    if(deliveryDate === undefined) deliveryDate = new Date()
     if(deposit >= ((15 / 100 ) * price)) {
       this.setState({
         price: price,
@@ -40,7 +40,7 @@ class App extends Component {
         arrangementFee: arrangement,
         completionFee: completion,
         formSubmitted: true
-      }, () => console.log(this.state.arrangementFee))
+      })
     }
     else {
       this.setState({
@@ -55,7 +55,6 @@ class App extends Component {
     let allPaymentDates = []
     let eachDate
     let monthsToPay = this.state.termLength*12;
-    let deliveryDate = new Date(date)
     // Get current month and add 1
     let firstPaymentDate = new Date(date.getFullYear(), date.getMonth() + 1)
     firstPaymentDate = firstPaymentDate.setDate(firstPaymentDate.getDate() + (nextMonday+(7 - firstPaymentDate.getDay())) % 7)
@@ -64,6 +63,7 @@ class App extends Component {
       eachDate = new Date(eachDate.setDate(eachDate.getDate() + (nextMonday+(7 - eachDate.getDay())) % 7))
       allPaymentDates.push(
         {
+          key: i+1,
           date: eachDate,
           payment: (this.state.price - this.state.deposit) / monthsToPay
         }
@@ -78,10 +78,10 @@ class App extends Component {
 
   renderSchedule = () => {
     const allDates = this.getMondays(this.state.date, 1).map(payment => (
-      <div key={payment.date+Math.random().toString()}>
-        <h3>{payment.date.toString()}</h3>
-        <h3>{payment.payment.toString()}</h3>
-      </div>
+      <tr key={payment.key}>
+        <td>{moment(payment.date).format("Mo MMM YYYY")}</td>
+        <td>£{payment.payment.toFixed(2)}</td>
+      </tr>
     ))
     return allDates
   }
@@ -205,7 +205,24 @@ class App extends Component {
             </div>
           </header>
         </div>
-          {this.state.formSubmitted ? this.renderSchedule() : ""}
+        {this.state.formSubmitted > 0 &&
+          <div>
+            <h3 className="ch-mt--4">Payment Schedule</h3>
+            <table
+              className="ch-table ch-table--bordered ch-table--hover ch-table--striped ch-mt--2"
+              width="100%">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Amount payable</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.renderSchedule()}
+              </tbody>
+            </table>
+          </div>
+        }
         </div>
       </div>
     );
