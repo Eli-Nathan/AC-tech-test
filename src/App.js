@@ -19,7 +19,7 @@ class App extends Component {
   changeTerm = (value) => {
     this.setState({
       termLength: value
-    })
+    }, () => this.state.formSubmitted ? this.calculateLoan() : "")
   }
 
   calculateLoan = () => {
@@ -43,24 +43,21 @@ class App extends Component {
   }
 
   getMondays = (date, nextMonday) => {
-    let deliveryDate = new Date(date)
-    let endDate = new Date(date.setFullYear(date.getFullYear() + this.state.termLength))
     let allPaymentDates = []
     let eachDate
-    let weeksToPay = this.state.termLength*53;
-    deliveryDate = deliveryDate.setDate(deliveryDate.getDate() + (nextMonday+(7-deliveryDate.getDay())) % 7)
-    endDate = endDate.setDate(endDate.getDate() + (nextMonday+(7-endDate.getDay())) % 7)
-    endDate = new Date(endDate)
-    console.log(endDate);
-
-    // endDate = moment(endDate).format("Do MMM YYYY")
-    for(let i = 0; i < weeksToPay; i++) {
-      eachDate = new Date(deliveryDate)
-      eachDate.setDate(eachDate.getDate() + (7 * i))
+    let monthsToPay = this.state.termLength*12;
+    let deliveryDate = new Date(date)
+    // Get current month and add 1
+    let firstPaymentDate = new Date(date.getFullYear(), date.getMonth() + 1)
+    firstPaymentDate = firstPaymentDate.setDate(firstPaymentDate.getDate() + (nextMonday+(7-firstPaymentDate.getDay())) % 7)
+    for(let i = 0; i < monthsToPay; i++) {
+      console.log(i);
+      eachDate = new Date(date.getFullYear(), date.getMonth() + (1 * (i+1)))
+      eachDate = new Date(eachDate.setDate(eachDate.getDate() + (nextMonday+(7-eachDate.getDay())) % 7))
       allPaymentDates.push(
         {
           date: eachDate,
-          payment: (this.state.price - this.state.deposit) / weeksToPay
+          payment: (this.state.price - this.state.deposit) / monthsToPay
         }
       )
     }
@@ -68,18 +65,17 @@ class App extends Component {
     allPaymentDates[0].payment = allPaymentDates[0].payment + 88;
     // Add 20 settlement payment to last date
     allPaymentDates[allPaymentDates.length -1].payment = allPaymentDates[allPaymentDates.length -1].payment + 20;
-    console.log(allPaymentDates);
-    return deliveryDate
+    return allPaymentDates
   }
 
   renderSchedule = () => {
-    let firstDate = new Date(this.getMondays(this.state.date, 1))
-    return (
-      <div>
-        <h2>Payment Schedule</h2>
-        <h3>{`First payment date is: ${firstDate}`}</h3>
+    const allDates = this.getMondays(this.state.date, 1).map(payment => (
+      <div key={payment.date+Math.random().toString()}>
+        <h3>{payment.date.toString()}</h3>
+        <h3>{payment.payment.toString()}</h3>
       </div>
-    )
+    ))
+    return allDates
   }
 
   render() {
