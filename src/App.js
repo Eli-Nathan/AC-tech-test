@@ -44,20 +44,23 @@ class App extends Component {
 
   getMondays = (date, nextMonday) => {
     let deliveryDate = new Date(date)
-    // let endDate = new Date(date.setFullYear(date.getFullYear() + this.state.termLength))
+    let endDate = new Date(date.setFullYear(date.getFullYear() + this.state.termLength))
     let allPaymentDates = []
     let eachDate
+    let weeksToPay = this.state.termLength*53;
     deliveryDate = deliveryDate.setDate(deliveryDate.getDate() + (nextMonday+(7-deliveryDate.getDay())) % 7)
-    // endDate = endDate.setDate(endDate.getDate() + (nextMonday+(7-endDate.getDay())) % 7)
+    endDate = endDate.setDate(endDate.getDate() + (nextMonday+(7-endDate.getDay())) % 7)
+    endDate = new Date(endDate)
+    console.log(endDate);
 
     // endDate = moment(endDate).format("Do MMM YYYY")
-    for(let i = 0; i < this.state.termLength*52; i++) {
+    for(let i = 0; i < weeksToPay; i++) {
       eachDate = new Date(deliveryDate)
       eachDate.setDate(eachDate.getDate() + (7 * i))
       allPaymentDates.push(
         {
           date: eachDate,
-          payment: 50
+          payment: (this.state.price - this.state.deposit) / weeksToPay
         }
       )
     }
