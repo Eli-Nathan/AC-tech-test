@@ -64,6 +64,10 @@ class App extends Component {
         }
       )
     }
+    // Add 88 initial payment to first date
+    allPaymentDates[0].payment = allPaymentDates[0].payment + 88;
+    // Add 20 settlement payment to last date
+    allPaymentDates[allPaymentDates.length -1].payment = allPaymentDates[allPaymentDates.length -1].payment + 20;
     console.log(allPaymentDates);
     return deliveryDate
   }
