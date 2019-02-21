@@ -45,12 +45,22 @@ class App extends Component {
   getMondays = (date, nextMonday) => {
     let deliveryDate = new Date(date)
     let endDate = new Date(date.setFullYear(date.getFullYear() + this.state.termLength))
+    let allPaymentDates = []
     deliveryDate = deliveryDate.setDate(deliveryDate.getDate() + (nextMonday+(7-deliveryDate.getDay())) % 7)
     endDate = endDate.setDate(endDate.getDate() + (nextMonday+(7-endDate.getDay())) % 7)
-    deliveryDate = moment(deliveryDate).format("Do MMM YYYY")
-    endDate = moment(endDate).format("Do MMM YYYY")
+    deliveryDate = moment(deliveryDate, "YYYY-MM-DD").format("Do MMM YYYY")
+    endDate = moment(endDate, "YYYY-MM-DD").format("Do MMM YYYY")
     console.log(deliveryDate);
     console.log(endDate);
+    for(let i = 0; i < this.state.termLength*52; i++) {
+      allPaymentDates.push(
+        {
+          date: moment(deliveryDate, "YYYY-MM-DD").add(1, 'week').format("Do MMM YYYY"),
+          payment: 50
+        }
+      )
+    }
+    console.log(allPaymentDates);
     return deliveryDate
   }
 
