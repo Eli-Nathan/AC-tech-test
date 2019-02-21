@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
+import moment from 'moment';
 import logo from './ac-logo.svg';
 import './App.scss';
 
@@ -42,16 +42,16 @@ class App extends Component {
     }
   }
 
-  renderSchedule = () => {
-    // console.log(this.state.price)
-    return <h3>First payment date is: <Moment format="do MMM YYYY">{this.getNextDayOfWeek(this.state.date, 1)}</Moment></h3>
-  }
-
   getNextDayOfWeek = (date, nextMonday) => {
     let resultDate = new Date(date)
     resultDate.setDate(resultDate.getDate() + (nextMonday+(7-resultDate.getDay())) % 7)
-    return resultDate
-}
+    let m = moment(resultDate).format('do MMM YYYY')
+    return m
+  }
+
+  renderSchedule = () => {
+    return <h3>{"First payment date is: " + this.getNextDayOfWeek(this.state.date, 1)}</h3>
+  }
 
   render() {
     return (
