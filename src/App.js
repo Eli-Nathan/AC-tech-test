@@ -42,15 +42,25 @@ class App extends Component {
     }
   }
 
-  getNextDayOfWeek = (date, nextMonday) => {
-    let resultDate = new Date(date)
-    resultDate.setDate(resultDate.getDate() + (nextMonday+(7-resultDate.getDay())) % 7)
-    let m = moment(resultDate).format('do MMM YYYY')
-    return m
+  getMondays = (date, nextMonday) => {
+    let deliveryDate = new Date(date)
+    let endDate = new Date(date.setFullYear(date.getFullYear() + this.state.termLength))
+    deliveryDate = deliveryDate.setDate(deliveryDate.getDate() + (nextMonday+(7-deliveryDate.getDay())) % 7)
+    endDate = endDate.setDate(endDate.getDate() + (nextMonday+(7-endDate.getDay())) % 7)
+    deliveryDate = moment(deliveryDate).format("Do MMM YYYY")
+    endDate = moment(endDate).format("Do MMM YYYY")
+    console.log(deliveryDate);
+    console.log(endDate);
+    return deliveryDate
   }
 
   renderSchedule = () => {
-    return <h3>{"First payment date is: " + this.getNextDayOfWeek(this.state.date, 1)}</h3>
+    return (
+      <div>
+        <h2>Payment Schedule</h2>
+        <h3>{`First payment date is: ${this.getMondays(this.state.date, 1)}`}</h3>
+      </div>
+    )
   }
 
   render() {
