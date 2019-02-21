@@ -7,6 +7,7 @@ class Form extends Component {
       vehiclePrice: null,
       deposit: null,
       date: null,
+      formSubmitted: false,
       termLength: null,
       depositError: "ch-form__group"
     }
@@ -27,7 +28,8 @@ class Form extends Component {
         price: price,
         deposit: deposit,
         date: deliveryDate,
-        depositError: "ch-form__group"
+        depositError: "ch-form__group",
+        formSubmitted: true
       })
     }
     else {
