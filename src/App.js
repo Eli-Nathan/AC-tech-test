@@ -92,6 +92,29 @@ class App extends Component {
     return allDates
   }
 
+  renderVehicles = () => {
+    fetch('https://cors.io/?https://www.arnoldclark.com/used-cars/search.json?payment_type=monthly&amp;min_price=100&amp;max_price=150&amp;sort_order=monthly_payment_up', {
+
+    })
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
+      }
+
+      // Examine the text in the response
+      response.json().then(function(data) {
+        console.log(data.searchResults);
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+  }
+
   render() {
     return (
       <div className="App">
@@ -229,6 +252,7 @@ class App extends Component {
               </tbody>
             </table>
             <h3 className="ch-mt--4">Payment Schedule</h3>
+            {this.renderVehicles()}
           </div>
         }
         </div>
