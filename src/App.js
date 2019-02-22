@@ -14,8 +14,10 @@ class App extends Component {
       arrangementFee: 88,
       completionFee: 20,
       termLength: null,
-      depositError: "ch-form__group"
+      depositError: "ch-form__group",
+      data: null
     }
+    this.renderVehicles = this.renderVehicles.bind(this)
   }
 
   componentDidMount = () => {
@@ -45,7 +47,8 @@ class App extends Component {
         depositError: "ch-form__group",
         arrangementFee: arrangement,
         completionFee: completion,
-        formSubmitted: true
+        formSubmitted: true,
+        monthlyMax: parseInt((price - deposit) / (this.state.termLength*12))
       })
     }
     else {
@@ -60,10 +63,7 @@ class App extends Component {
   getMondays = (date, nextMonday) => {
     let allPaymentDates = []
     let eachDate
-    let monthsToPay = this.state.termLength*12;
-    // Get current month and add 1
-    let firstPaymentDate = new Date(date.getFullYear(), date.getMonth() + 1)
-    firstPaymentDate = new Date(firstPaymentDate.setDate(firstPaymentDate.getDate() + (nextMonday+(7 - firstPaymentDate.getDay())) % 7))
+    let monthsToPay = this.state.termLength*12
     for(let i = 0; i < monthsToPay; i++) {
       eachDate = new Date(date.getFullYear(), (date.getMonth() + (i + 1)))
       eachDate = new Date(eachDate.setDate(eachDate.getDate() + (nextMonday+(7 - eachDate.getDay())) % 7))
@@ -71,7 +71,7 @@ class App extends Component {
         {
           key: i+1,
           date: eachDate,
-          payment: (this.state.price - this.state.deposit) / monthsToPay
+          payment: this.state.monthlyMax
         }
       )
     }
@@ -92,27 +92,42 @@ class App extends Component {
     return allDates
   }
 
-  renderVehicles = () => {
-    fetch('https://cors.io/?https://www.arnoldclark.com/used-cars/search.json?payment_type=monthly&amp;min_price=100&amp;max_price=150&amp;sort_order=monthly_payment_up', {
+  getData = () => {
+    let _this = this
+    fetch('https://cors.io/?https://www.arnoldclark.com/used-cars/search.json?payment_type=monthly&amp;min_price=100&amp;max_price=150&amp;sort_order=monthly_payment_up')
+    .then(
+      response => {
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+            response.status);
+          return;
+        }
 
-    })
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' +
-          response.status);
-        return;
+        // Examine the text in the response
+        response.json().then(
+          data => {
+            _this.setState({data: data.searchResults.filter(d => d.salesInfo.pricing.monthlyPayment <= _this.state.monthlyMax)})
+          }
+        );
       }
+    )
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
+  }
 
-      // Examine the text in the response
-      response.json().then(function(data) {
-        console.log(data.searchResults);
-      });
-    }
-  )
-  .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
+  renderVehicles = () => {
+    let vehicles = "Loading..."
+    let _this = this
+    this.getData()
+    setTimeout(function(){
+      vehicles = _this.state.data.map(vehicle => (
+        <h1>{vehicle.make}</h1>
+      ))
+      return vehicles
+    }, 6000);
+
+    return vehicles
   }
 
   render() {
@@ -237,6 +252,8 @@ class App extends Component {
         </div>
         {this.state.formSubmitted > 0 &&
           <div>
+            <h3>Your quote</h3>
+            <p>{`You will borrow £${this.state.price - this.state.deposit} over ${this.state.termLength} years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £${this.state.arrangementFee} and the final payment is inclusive of a £${this.state.completionFee}`}</p>
             <h3 className="ch-mt--4">Payment Schedule</h3>
             <table
               className="ch-table ch-table--bordered ch-table--hover ch-table--striped ch-mt--2"
@@ -251,7 +268,7 @@ class App extends Component {
                 {this.renderSchedule()}
               </tbody>
             </table>
-            <h3 className="ch-mt--4">Payment Schedule</h3>
+            <h3 className="ch-mt--4">Recommended vehicles</h3>
             {this.renderVehicles()}
           </div>
         }
