@@ -18,6 +18,12 @@ class App extends Component {
     }
   }
 
+  componentDidMount = () => {
+    this.setState({
+      termLength: 1
+    })
+  }
+
   changeTerm = (value) => {
     this.setState({
       termLength: value
@@ -30,7 +36,7 @@ class App extends Component {
     let deliveryDate = document.getElementById("deliveryDate").valueAsDate
     let arrangement = parseInt(document.getElementById("arrangement").value)
     let completion = parseInt(document.getElementById("completion").value)
-    if(deliveryDate === undefined) deliveryDate = new Date()
+    if(deliveryDate === null) deliveryDate = new Date()
     if(deposit >= ((15 / 100 ) * price)) {
       this.setState({
         price: price,
@@ -57,9 +63,9 @@ class App extends Component {
     let monthsToPay = this.state.termLength*12;
     // Get current month and add 1
     let firstPaymentDate = new Date(date.getFullYear(), date.getMonth() + 1)
-    firstPaymentDate = firstPaymentDate.setDate(firstPaymentDate.getDate() + (nextMonday+(7 - firstPaymentDate.getDay())) % 7)
+    firstPaymentDate = new Date(firstPaymentDate.setDate(firstPaymentDate.getDate() + (nextMonday+(7 - firstPaymentDate.getDay())) % 7))
     for(let i = 0; i < monthsToPay; i++) {
-      eachDate = new Date(date.getFullYear(), date.getMonth() + (1 * (i+1)))
+      eachDate = new Date(date.getFullYear(), (date.getMonth() + (i + 1)))
       eachDate = new Date(eachDate.setDate(eachDate.getDate() + (nextMonday+(7 - eachDate.getDay())) % 7))
       allPaymentDates.push(
         {
@@ -79,7 +85,7 @@ class App extends Component {
   renderSchedule = () => {
     const allDates = this.getMondays(this.state.date, 1).map(payment => (
       <tr key={payment.key}>
-        <td>{moment(payment.date).format("Mo MMM YYYY")}</td>
+        <td>{moment(payment.date).format("Do MMM YYYY")}</td>
         <td>£{payment.payment.toFixed(2)}</td>
       </tr>
     ))
@@ -162,10 +168,11 @@ class App extends Component {
                 name="financeTerm"
                 value={1}
                 className="ch-reader ch-radio"
-                onChange={() => this.changeTerm(1)} />
+                onChange={() => this.changeTerm(1)}
+                defaultChecked />
               <label
                 htmlFor="oneYear"
-                className="ch-radio__label ch-radio__label--compact">
+                className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact">
                 1 year
               </label>
 
@@ -178,7 +185,7 @@ class App extends Component {
                 onChange={() => this.changeTerm(2)} />
               <label
                 htmlFor="twoYears"
-                className="ch-ml--2 ch-radio__label ch-radio__label--compact">
+                className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact">
                 2 years
               </label>
 
@@ -191,7 +198,7 @@ class App extends Component {
                 onChange={() => this.changeTerm(3)} />
               <label
                 htmlFor="threeYears"
-                className="ch-ml--2 ch-radio__label ch-radio__label--compact">
+                className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact">
                 3 years
               </label>
             </div>
@@ -221,6 +228,7 @@ class App extends Component {
                 {this.renderSchedule()}
               </tbody>
             </table>
+            <h3 className="ch-mt--4">Payment Schedule</h3>
           </div>
         }
         </div>
