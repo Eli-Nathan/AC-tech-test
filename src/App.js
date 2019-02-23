@@ -15,7 +15,7 @@ class App extends Component {
       completionFee: 20,
       termLength: null,
       depositError: "ch-form__group",
-      data: null
+      data: []
     }
     this.renderVehicles = this.renderVehicles.bind(this)
   }
@@ -24,6 +24,7 @@ class App extends Component {
     this.setState({
       termLength: 1
     })
+    this.getData()
   }
 
   changeTerm = (value) => {
@@ -94,6 +95,7 @@ class App extends Component {
 
   getData = () => {
     let _this = this
+    // I'm well aware of the obvious security risk below but my CORS plugin has been playing up so I'm using cors.io for the purposes of this tech test
     fetch('https://cors.io/?https://www.arnoldclark.com/used-cars/search.json?payment_type=monthly&amp;min_price=100&amp;max_price=150&amp;sort_order=monthly_payment_up')
     .then(
       response => {
@@ -106,28 +108,26 @@ class App extends Component {
         // Examine the text in the response
         response.json().then(
           data => {
-            _this.setState({data: data.searchResults.filter(d => d.salesInfo.pricing.monthlyPayment <= _this.state.monthlyMax)})
+            _this.setState({data: data.searchResults})
           }
         );
       }
     )
     .catch(function(err) {
       console.log('Fetch Error :-S', err);
-    });
+    });;
   }
 
   renderVehicles = () => {
     let vehicles = "Loading..."
-    let _this = this
-    this.getData()
-    setTimeout(function(){
-      vehicles = _this.state.data.map(vehicle => (
+    let data = this.state.data.filter(d => d.salesInfo.pricing.monthlyPayment <= this.state.monthlyMax)
+    console.log(data);
+    if(data.length === 0) {
+        return vehicles;
+    }
+    return data.map(vehicle => (
         <h1>{vehicle.make}</h1>
-      ))
-      return vehicles
-    }, 6000);
-
-    return vehicles
+    ));
   }
 
   render() {
