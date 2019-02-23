@@ -119,15 +119,34 @@ class App extends Component {
   }
 
   renderVehicles = () => {
-    let vehicles = "Loading..."
+    let vehicles = "Sorry, no vehicles found"
     let data = this.state.data.filter(d => d.salesInfo.pricing.monthlyPayment <= this.state.monthlyMax)
     console.log(data);
     if(data.length === 0) {
-        return vehicles;
+      return vehicles;
+    }
+
+    if(data.length > 6) {
+      data.length = 6
     }
     return data.map(vehicle => (
-        <h1>{vehicle.make}</h1>
-    ));
+      <div className="sm:ch-col--6 md:ch-col--4 ch-mb--2 vehicleCard" key={vehicle.stockReference}>
+        <div className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-rounded">
+          <a href={vehicle.url} className="ch-color--ac-black ch-text-decoration--none">
+            <div>
+              <img
+                src={vehicle.thumbnails.length === 0 ? "https://www.arnoldclark.com/assets/application/no-images-vehicle-8c4df08470af32dee8f1a3ea091e72cbf2bac4225054b1844de0880d1bf766ae.svg" : vehicle.thumbnails[0]}
+                alt={`${vehicle.make} ${vehicle.model}`}
+                className="ch-img-responsive "/>
+            </div>
+            <div className="ch-pa--2">
+              <h4>{vehicle.title.name}</h4>
+              <h5 className="ch-color--grey-5">{vehicle.title.variant}</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+    ))
   }
 
   render() {
@@ -138,141 +157,145 @@ class App extends Component {
           <h1 className="ch-mt--3">Interest free loan calculator</h1>
         </header>
         <div className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3">
-        <div className="form ch-bg--white ch-ba--1 ch-bc--grey-2 ch-pa--3 ch-rounded">
-          <header className="form-header">
-            <div className="ch-form__group">
-              <label
-                htmlFor="price"
-                className="ch-form__control-label">
-                Vehicle Price (£)
-              </label>
-              <input
-                className="ch-form__control"
-                type="number"
-                id="price" />
-            </div>
-            <div className={this.state.depositError}>
-              <label
-                htmlFor="deposit"
-                className="ch-form__control-label">
-                Desposit amount (£)
-              </label>
-              <span className="ch-form__control-validation">{`Deposit must be at least 15% of the vehicle price, i.e. £${(15 / 100 ) * this.state.price}`}</span>
-              <input
-                className="ch-form__control"
-                type="number"
-                id="deposit" />
-            </div>
-            <div className="ch-form__group">
-              <label
-                htmlFor="deliveryDate"
-                className="ch-form__control-label">
-                Delivery date
-              </label>
-              <input
-                className="ch-form__control"
-                type="date"
-                id="deliveryDate" />
-            </div>
-            <div className="ch-form__group ch-display--inline-block ch-mr--2">
-              <label
-                htmlFor="arrangement"
-                className="ch-form__control-label">
-                Arrangement fee (£)
-              </label>
-              <input
-                className="ch-form__control"
-                type="number"
-                id="arrangement"
-                defaultValue={88} />
-            </div>
-            <div className="ch-form__group ch-display--inline-block">
-              <label
-                htmlFor="completion"
-                className="ch-form__control-label">
-                Completion fee (£)
-              </label>
-              <input
-                className="ch-form__control"
-                type="number"
-                id="completion"
-                defaultValue={20} />
-            </div>
-            <div className="ch-form__group">
-              <h5 className="ch-mb--1">Finance term</h5>
-              <input
-                id="oneYear"
-                type="radio"
-                name="financeTerm"
-                value={1}
-                className="ch-reader ch-radio"
-                onChange={() => this.changeTerm(1)}
-                defaultChecked />
-              <label
-                htmlFor="oneYear"
-                className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact">
-                1 year
-              </label>
+          <div className="form ch-bg--white ch-ba--1 ch-bc--grey-2 ch-pa--3 ch-rounded">
+            <header className="form-header">
+              <div className="ch-form__group">
+                <label
+                  htmlFor="price"
+                  className="ch-form__control-label">
+                  Vehicle Price (£)
+                </label>
+                <input
+                  className="ch-form__control"
+                  type="number"
+                  id="price" />
+              </div>
+              <div className={this.state.depositError}>
+                <label
+                  htmlFor="deposit"
+                  className="ch-form__control-label">
+                  Desposit amount (£)
+                </label>
+                <span className="ch-form__control-validation">{`Deposit must be at least 15% of the vehicle price, i.e. £${(15 / 100 ) * this.state.price}`}</span>
+                <input
+                  className="ch-form__control"
+                  type="number"
+                  id="deposit" />
+              </div>
+              <div className="ch-form__group">
+                <label
+                  htmlFor="deliveryDate"
+                  className="ch-form__control-label">
+                  Delivery date
+                </label>
+                <input
+                  className="ch-form__control"
+                  type="date"
+                  id="deliveryDate" />
+              </div>
+              <div className="ch-form__group ch-display--inline-block ch-mr--2">
+                <label
+                  htmlFor="arrangement"
+                  className="ch-form__control-label">
+                  Arrangement fee (£)
+                </label>
+                <input
+                  className="ch-form__control"
+                  type="number"
+                  id="arrangement"
+                  defaultValue={88} />
+              </div>
+              <div className="ch-form__group ch-display--inline-block">
+                <label
+                  htmlFor="completion"
+                  className="ch-form__control-label">
+                  Completion fee (£)
+                </label>
+                <input
+                  className="ch-form__control"
+                  type="number"
+                  id="completion"
+                  defaultValue={20} />
+              </div>
+              <div className="ch-form__group">
+                <h5 className="ch-mb--1">Finance term</h5>
+                <input
+                  id="oneYear"
+                  type="radio"
+                  name="financeTerm"
+                  value={1}
+                  className="ch-reader ch-radio"
+                  onChange={() => this.changeTerm(1)}
+                  defaultChecked />
+                <label
+                  htmlFor="oneYear"
+                  className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact">
+                  1 year
+                </label>
 
-              <input
-                id="twoYears"
-                type="radio"
-                name="financeTerm"
-                value={2}
-                className="ch-reader ch-radio"
-                onChange={() => this.changeTerm(2)} />
-              <label
-                htmlFor="twoYears"
-                className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact">
-                2 years
-              </label>
+                <input
+                  id="twoYears"
+                  type="radio"
+                  name="financeTerm"
+                  value={2}
+                  className="ch-reader ch-radio"
+                  onChange={() => this.changeTerm(2)} />
+                <label
+                  htmlFor="twoYears"
+                  className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact">
+                  2 years
+                </label>
 
-              <input
-                id="threeYears"
-                type="radio"
-                name="financeTerm"
-                value={3}
-                className="ch-reader ch-radio"
-                onChange={() => this.changeTerm(3)} />
-              <label
-                htmlFor="threeYears"
-                className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact">
-                3 years
-              </label>
-            </div>
-            <div className="ch-form__group">
-              <button
-                id="submit"
-                className="ch-btn ch-btn--success"
-                onClick={this.calculateLoan}>
-                Calculate
-              </button>
-            </div>
-          </header>
+                <input
+                  id="threeYears"
+                  type="radio"
+                  name="financeTerm"
+                  value={3}
+                  className="ch-reader ch-radio"
+                  onChange={() => this.changeTerm(3)} />
+                <label
+                  htmlFor="threeYears"
+                  className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact">
+                  3 years
+                </label>
+              </div>
+              <div className="ch-form__group">
+                <button
+                  id="submit"
+                  className="ch-btn ch-btn--success"
+                  onClick={this.calculateLoan}>
+                  Calculate
+                </button>
+              </div>
+            </header>
+          </div>
         </div>
         {this.state.formSubmitted > 0 &&
           <div>
-            <h3>Your quote</h3>
-            <p>{`You will borrow £${this.state.price - this.state.deposit} over ${this.state.termLength} years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £${this.state.arrangementFee} and the final payment is inclusive of a £${this.state.completionFee}`}</p>
-            <h3 className="ch-mt--4">Payment Schedule</h3>
-            <table
-              className="ch-table ch-table--bordered ch-table--hover ch-table--striped ch-mt--2"
-              width="100%">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Amount payable</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.renderSchedule()}
-              </tbody>
-            </table>
-            <h3 className="ch-mt--4">Recommended vehicles</h3>
+            <div className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3">
+              <h3>Your quote</h3>
+              <p>{`You will borrow £${this.state.price - this.state.deposit} over ${this.state.termLength} years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £${this.state.arrangementFee} and the final payment is inclusive of a £${this.state.completionFee}`}</p>
+              <h3 className="ch-mt--4">Payment Schedule</h3>
+              <table
+                className="ch-table ch-table--bordered ch-table--hover ch-table--striped ch-mt--2"
+                width="100%">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Amount payable</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.renderSchedule()}
+                </tbody>
+              </table>
+            </div>
+            <div className="sm:ch-col--12">
+              <h3 className="ch-mt--4">Recommended vehicles</h3>
+            </div>
             {this.renderVehicles()}
           </div>
         }
-        </div>
       </div>
     );
   }
