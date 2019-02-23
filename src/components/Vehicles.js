@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class Vehicles extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.renderVehicles = this.renderVehicles.bind(this)
   }
 
@@ -10,7 +10,7 @@ class Vehicles extends Component {
     let vehicles = "Sorry, no vehicles found"
     let data = this.props.data.filter(d => d.salesInfo.pricing.monthlyPayment <= this.props.monthlyMax)
     if(data.length === 0) {
-      return vehicles;
+      return vehicles
     }
 
     if(data.length > 6) {
@@ -44,8 +44,8 @@ class Vehicles extends Component {
         </div>
         {this.renderVehicles()}
       </div>
-    );
+    )
   }
 }
 
-export default Vehicles;
+export default Vehicles

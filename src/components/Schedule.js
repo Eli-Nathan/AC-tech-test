@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import moment from 'moment'
 
 class Schedule extends Component {
@@ -18,9 +18,9 @@ class Schedule extends Component {
       )
     }
     // Add 88 initial payment to first date
-    allPaymentDates[0].payment = allPaymentDates[0].payment + this.props.arrangementFee;
+    allPaymentDates[0].payment = allPaymentDates[0].payment + this.props.arrangementFee
     // Add 20 settlement payment to last date
-    allPaymentDates[allPaymentDates.length -1].payment = allPaymentDates[allPaymentDates.length -1].payment + this.props.completionFee;
+    allPaymentDates[allPaymentDates.length -1].payment = allPaymentDates[allPaymentDates.length -1].payment + this.props.completionFee
     return allPaymentDates
   }
 
@@ -52,8 +52,8 @@ class Schedule extends Component {
           </tbody>
         </table>
       </div>
-    );
+    )
   }
 }
 
-export default Schedule;
+export default Schedule
