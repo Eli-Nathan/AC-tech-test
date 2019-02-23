@@ -135,7 +135,7 @@ class App extends Component {
           <a href={vehicle.url} className="ch-color--ac-black ch-text-decoration--none">
             <div>
               <img
-                src={vehicle.thumbnails.length === 0 ? "https://www.arnoldclark.com/assets/application/no-images-vehicle-8c4df08470af32dee8f1a3ea091e72cbf2bac4225054b1844de0880d1bf766ae.svg" : vehicle.thumbnails[0]}
+                src={vehicle.photos.length === 0 ? "https://www.arnoldclark.com/assets/application/no-images-vehicle-8c4df08470af32dee8f1a3ea091e72cbf2bac4225054b1844de0880d1bf766ae.svg" : vehicle.photos[0]}
                 alt={`${vehicle.make} ${vehicle.model}`}
                 className="ch-img-responsive "/>
             </div>
