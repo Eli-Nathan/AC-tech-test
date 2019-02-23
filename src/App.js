@@ -35,6 +35,33 @@ class App extends Component {
     this.getData()
   }
 
+  getData = () => {
+    // I'm well aware of the obvious security risk below but my CORS plugin has been playing up so I'm using cors.io for the purposes of this tech test
+    fetch('https://cors.io/?https://www.arnoldclark.com/used-cars/search.json?payment_type=monthly&amp;min_price=100&amp;max_price=150&amp;sort_order=monthly_payment_up')
+    .then(
+      response => {
+        // Show alert if there's any issues
+        if (response.status !== 200) {
+          alert('Looks like there was a problem getting vehicle data. Status Code: ' +
+            response.status)
+          return
+        }
+
+        // Grab the response and setState
+        response.json().then(
+          data => {
+            this.setState({data: data.searchResults})
+          }
+        )
+      }
+    )
+
+    // Last catch :)
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err)
+    })
+  }
+
   // When radio button is clicked
   changeTerm = (value) => {
     // Set termLength state
@@ -83,35 +110,6 @@ class App extends Component {
         depositError: true
       })
     }
-  }
-
-
-
-  getData = () => {
-    // I'm well aware of the obvious security risk below but my CORS plugin has been playing up so I'm using cors.io for the purposes of this tech test
-    fetch('https://cors.io/?https://www.arnoldclark.com/used-cars/search.json?payment_type=monthly&amp;min_price=100&amp;max_price=150&amp;sort_order=monthly_payment_up')
-    .then(
-      response => {
-        // Show alert if there's any issues
-        if (response.status !== 200) {
-          alert('Looks like there was a problem getting vehicle data. Status Code: ' +
-            response.status)
-          return
-        }
-
-        // Grab the response and setState
-        response.json().then(
-          data => {
-            this.setState({data: data.searchResults})
-          }
-        )
-      }
-    )
-
-    // Last catch :)
-    .catch(function(err) {
-      console.log('Fetch Error :-S', err)
-    })
   }
 
   render() {
