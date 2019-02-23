@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import moment from 'moment';
-import logo from './ac-logo.svg';
-import './App.scss';
+import React, { Component } from 'react'
+import Quote from './components/Quote';
+import Vehicles from './components/Vehicles'
+import Schedule from './components/Schedule'
+import logo from './ac-logo.svg'
+import './App.scss'
 
 class App extends Component {
   constructor(props) {
@@ -14,10 +16,9 @@ class App extends Component {
       arrangementFee: 88,
       completionFee: 20,
       termLength: null,
-      depositError: "ch-form__group",
+      depositError: false,
       data: []
     }
-    this.renderVehicles = this.renderVehicles.bind(this)
   }
 
   componentDidMount = () => {
@@ -45,7 +46,7 @@ class App extends Component {
         price: price,
         deposit: deposit,
         date: deliveryDate,
-        depositError: "ch-form__group",
+        depositError: false,
         arrangementFee: arrangement,
         completionFee: completion,
         formSubmitted: true,
@@ -56,42 +57,12 @@ class App extends Component {
       this.setState({
         price: price,
         date: new Date(),
-        depositError: "ch-form__group ch-form__group--error"
+        depositError: true
       })
     }
   }
 
-  getMondays = (date, nextMonday) => {
-    let allPaymentDates = []
-    let eachDate
-    let monthsToPay = this.state.termLength*12
-    for(let i = 0; i < monthsToPay; i++) {
-      eachDate = new Date(date.getFullYear(), (date.getMonth() + (i + 1)))
-      eachDate = new Date(eachDate.setDate(eachDate.getDate() + (nextMonday+(7 - eachDate.getDay())) % 7))
-      allPaymentDates.push(
-        {
-          key: i+1,
-          date: eachDate,
-          payment: this.state.monthlyMax
-        }
-      )
-    }
-    // Add 88 initial payment to first date
-    allPaymentDates[0].payment = allPaymentDates[0].payment + this.state.arrangementFee;
-    // Add 20 settlement payment to last date
-    allPaymentDates[allPaymentDates.length -1].payment = allPaymentDates[allPaymentDates.length -1].payment + this.state.completionFee;
-    return allPaymentDates
-  }
 
-  renderSchedule = () => {
-    const allDates = this.getMondays(this.state.date, 1).map(payment => (
-      <tr key={payment.key}>
-        <td>{moment(payment.date).format("Do MMM YYYY")}</td>
-        <td>£{payment.payment.toFixed(2)}</td>
-      </tr>
-    ))
-    return allDates
-  }
 
   getData = () => {
     let _this = this
@@ -118,37 +89,6 @@ class App extends Component {
     });;
   }
 
-  renderVehicles = () => {
-    let vehicles = "Sorry, no vehicles found"
-    let data = this.state.data.filter(d => d.salesInfo.pricing.monthlyPayment <= this.state.monthlyMax)
-    console.log(data);
-    if(data.length === 0) {
-      return vehicles;
-    }
-
-    if(data.length > 6) {
-      data.length = 6
-    }
-    return data.map(vehicle => (
-      <div className="sm:ch-col--6 md:ch-col--4 ch-mb--2 vehicleCard" key={vehicle.stockReference}>
-        <div className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-rounded">
-          <a href={vehicle.url} className="ch-color--ac-black ch-text-decoration--none">
-            <div>
-              <img
-                src={vehicle.photos.length === 0 ? "https://www.arnoldclark.com/assets/application/no-images-vehicle-8c4df08470af32dee8f1a3ea091e72cbf2bac4225054b1844de0880d1bf766ae.svg" : vehicle.photos[0]}
-                alt={`${vehicle.make} ${vehicle.model}`}
-                className="ch-img-responsive "/>
-            </div>
-            <div className="ch-pa--2">
-              <h4>{vehicle.title.name}</h4>
-              <h5 className="ch-color--grey-5">{vehicle.title.variant}</h5>
-            </div>
-          </a>
-        </div>
-      </div>
-    ))
-  }
-
   render() {
     return (
       <div className="App">
@@ -170,7 +110,7 @@ class App extends Component {
                   type="number"
                   id="price" />
               </div>
-              <div className={this.state.depositError}>
+              <div className={`ch-form__group ${this.state.depositError && "ch-form__group--error" }`}>
                 <label
                   htmlFor="deposit"
                   className="ch-form__control-label">
@@ -273,27 +213,28 @@ class App extends Component {
         {this.state.formSubmitted > 0 &&
           <div>
             <div className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3">
-              <h3>Your quote</h3>
-              <p>{`You will borrow £${this.state.price - this.state.deposit} over ${this.state.termLength} years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £${this.state.arrangementFee} and the final payment is inclusive of a £${this.state.completionFee}`}</p>
-              <h3 className="ch-mt--4">Payment Schedule</h3>
-              <table
-                className="ch-table ch-table--bordered ch-table--hover ch-table--striped ch-mt--2"
-                width="100%">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Amount payable</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.renderSchedule()}
-                </tbody>
-              </table>
+              { /* Quote component */ }
+              <Quote
+                price={this.state.price}
+                deposit={this.state.deposit}
+                termLength={this.state.termLength}
+                arrangementFee={this.state.arrangementFee}
+                completionFee={this.state.completionFee} />
+
+              { /* Schedule component */ }
+              <Schedule
+                termLength={this.state.termLength}
+                monthlyMax={this.state.monthlyMax}
+                arrangementFee={this.state.completionFee}
+                completionFee={this.state.completionFee}
+                date={this.state.date} />
+
             </div>
-            <div className="sm:ch-col--12">
-              <h3 className="ch-mt--4">Recommended vehicles</h3>
-            </div>
-            {this.renderVehicles()}
+
+            { /* Vehicles component */ }
+            <Vehicles
+              data={this.state.data}
+              monthlyMax={this.state.monthlyMax} />
           </div>
         }
       </div>
