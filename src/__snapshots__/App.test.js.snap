@@ -1,0 +1,506 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> matches the snapshot 1`] = `
+<div
+  className="ch-pv--4"
+>
+  <div
+    className="ch-text--center"
+  >
+    <img
+      alt="logo"
+      src="ac-logo.svg"
+    />
+    <h1
+      className="ch-mt--3"
+    >
+      Interest free loan calculator
+    </h1>
+  </div>
+  <div
+    className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3"
+  >
+    <div
+      className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-pa--3 ch-rounded"
+    >
+      <div
+        className="ch-form__group"
+      >
+        <label
+          className="ch-form__control-label"
+          htmlFor="price"
+        >
+          Vehicle Price (£)
+        </label>
+        <input
+          className="ch-form__control"
+          id="price"
+          type="number"
+        />
+      </div>
+      <div
+        className="ch-form__groupfalse"
+      >
+        <label
+          className="ch-form__control-label"
+          htmlFor="deposit"
+        >
+          Desposit amount (£)
+        </label>
+        <span
+          className="ch-form__control-validation"
+        >
+          Deposit must be at least 15% of the vehicle price, i.e. £NaN
+        </span>
+        <input
+          className="ch-form__control"
+          id="deposit"
+          type="number"
+        />
+      </div>
+      <div
+        className="ch-form__group"
+      >
+        <label
+          className="ch-form__control-label"
+          htmlFor="deliveryDate"
+        >
+          Delivery date
+        </label>
+        <input
+          className="ch-form__control"
+          id="deliveryDate"
+          type="date"
+        />
+      </div>
+      <div
+        className="ch-form__group ch-display--inline-block ch-mr--2"
+      >
+        <label
+          className="ch-form__control-label"
+          htmlFor="arrangement"
+        >
+          Arrangement fee (£)
+        </label>
+        <input
+          className="ch-form__control"
+          defaultValue={88}
+          id="arrangement"
+          type="number"
+        />
+      </div>
+      <div
+        className="ch-form__group ch-display--inline-block"
+      >
+        <label
+          className="ch-form__control-label"
+          htmlFor="completion"
+        >
+          Completion fee (£)
+        </label>
+        <input
+          className="ch-form__control"
+          defaultValue={20}
+          id="completion"
+          type="number"
+        />
+      </div>
+      <div
+        className="ch-form__group"
+      >
+        <h5
+          className="ch-mb--1"
+        >
+          Finance term
+        </h5>
+        <input
+          className="ch-reader ch-radio"
+          defaultChecked={true}
+          id="oneYear"
+          name="financeTerm"
+          onChange={[Function]}
+          type="radio"
+          value={1}
+        />
+        <label
+          className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact"
+          htmlFor="oneYear"
+        >
+          1 year
+        </label>
+        <input
+          className="ch-reader ch-radio"
+          id="twoYears"
+          name="financeTerm"
+          onChange={[Function]}
+          type="radio"
+          value={2}
+        />
+        <label
+          className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
+          htmlFor="twoYears"
+        >
+          2 years
+        </label>
+        <input
+          className="ch-reader ch-radio"
+          id="threeYears"
+          name="financeTerm"
+          onChange={[Function]}
+          type="radio"
+          value={3}
+        />
+        <label
+          className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
+          htmlFor="threeYears"
+        >
+          3 years
+        </label>
+      </div>
+      <div
+        className="ch-form__group"
+      >
+        <button
+          className="ch-btn ch-btn--success"
+          id="submit"
+          onClick={[Function]}
+        >
+          Calculate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Form /> matches the snapshot 1`] = `
+<div
+  className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3"
+>
+  <div
+    className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-pa--3 ch-rounded"
+  >
+    <div
+      className="ch-form__group"
+    >
+      <label
+        className="ch-form__control-label"
+        htmlFor="price"
+      >
+        Vehicle Price (£)
+      </label>
+      <input
+        className="ch-form__control"
+        id="price"
+        type="number"
+      />
+    </div>
+    <div
+      className="ch-form__groupundefined"
+    >
+      <label
+        className="ch-form__control-label"
+        htmlFor="deposit"
+      >
+        Desposit amount (£)
+      </label>
+      <span
+        className="ch-form__control-validation"
+      >
+        Deposit must be at least 15% of the vehicle price, i.e. £NaN
+      </span>
+      <input
+        className="ch-form__control"
+        id="deposit"
+        type="number"
+      />
+    </div>
+    <div
+      className="ch-form__group"
+    >
+      <label
+        className="ch-form__control-label"
+        htmlFor="deliveryDate"
+      >
+        Delivery date
+      </label>
+      <input
+        className="ch-form__control"
+        id="deliveryDate"
+        type="date"
+      />
+    </div>
+    <div
+      className="ch-form__group ch-display--inline-block ch-mr--2"
+    >
+      <label
+        className="ch-form__control-label"
+        htmlFor="arrangement"
+      >
+        Arrangement fee (£)
+      </label>
+      <input
+        className="ch-form__control"
+        defaultValue={88}
+        id="arrangement"
+        type="number"
+      />
+    </div>
+    <div
+      className="ch-form__group ch-display--inline-block"
+    >
+      <label
+        className="ch-form__control-label"
+        htmlFor="completion"
+      >
+        Completion fee (£)
+      </label>
+      <input
+        className="ch-form__control"
+        defaultValue={20}
+        id="completion"
+        type="number"
+      />
+    </div>
+    <div
+      className="ch-form__group"
+    >
+      <h5
+        className="ch-mb--1"
+      >
+        Finance term
+      </h5>
+      <input
+        className="ch-reader ch-radio"
+        defaultChecked={true}
+        id="oneYear"
+        name="financeTerm"
+        onChange={[Function]}
+        type="radio"
+        value={1}
+      />
+      <label
+        className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact"
+        htmlFor="oneYear"
+      >
+        1 year
+      </label>
+      <input
+        className="ch-reader ch-radio"
+        id="twoYears"
+        name="financeTerm"
+        onChange={[Function]}
+        type="radio"
+        value={2}
+      />
+      <label
+        className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
+        htmlFor="twoYears"
+      >
+        2 years
+      </label>
+      <input
+        className="ch-reader ch-radio"
+        id="threeYears"
+        name="financeTerm"
+        onChange={[Function]}
+        type="radio"
+        value={3}
+      />
+      <label
+        className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
+        htmlFor="threeYears"
+      >
+        3 years
+      </label>
+    </div>
+    <div
+      className="ch-form__group"
+    >
+      <button
+        className="ch-btn ch-btn--success"
+        id="submit"
+      >
+        Calculate
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Header /> matches the snapshot 1`] = `
+<div
+  className="ch-text--center"
+>
+  <img
+    alt="logo"
+    src="ac-logo.svg"
+  />
+  <h1
+    className="ch-mt--3"
+  />
+</div>
+`;
+
+exports[`<Quote /> matches the snapshot 1`] = `
+<div>
+  <h3
+    className="ch-mt--4"
+  >
+    Your quote
+  </h3>
+  <p>
+    For your interest free loan, you will borrow £NaN over undefined years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £undefined and the final payment is inclusive of a £undefined
+  </p>
+</div>
+`;
+
+exports[`<Schedule /> matches the snapshot 1`] = `
+<div>
+  <h3
+    className="ch-mt--4"
+  >
+    Payment Schedule
+  </h3>
+  <table
+    className="ch-table ch-table--bordered ch-table--hover ch-table--striped ch-mt--2"
+    width="100%"
+  >
+    <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th>
+          Amount payable
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          4th Mar 2019
+        </td>
+        <td>
+          £
+          238.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          1st Apr 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          6th May 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          3rd Jun 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          1st Jul 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          5th Aug 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          2nd Sep 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          7th Oct 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          4th Nov 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          2nd Dec 2019
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          6th Jan 2020
+        </td>
+        <td>
+          £
+          150.00
+        </td>
+      </tr>
+      <tr>
+        <td>
+          3rd Feb 2020
+        </td>
+        <td>
+          £
+          170.00
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<Vehicles /> matches the snapshot 1`] = `
+<div>
+  <div
+    className="sm:ch-col--12"
+  >
+    <h3
+      className="ch-mt--4"
+    >
+      Recommended vehicles
+    </h3>
+  </div>
+  Sorry, no vehicles found
+</div>
+`;

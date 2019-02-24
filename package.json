@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chai": "^4.2.0",
     "moment": "^2.24.0",
+    "node-fetch": "^2.3.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
@@ -24,5 +26,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "fetch-mock": "^7.3.0"
+  }
 }
