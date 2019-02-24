@@ -16,6 +16,7 @@ class Vehicles extends Component {
     if(data.length > 6) {
       data.length = 6
     }
+
     return data.map(vehicle => (
       <div className="sm:ch-col--6 md:ch-col--4 ch-mb--2 vehicleCard" key={vehicle.stockReference}>
         <div className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-rounded">

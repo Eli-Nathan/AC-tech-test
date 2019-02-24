@@ -2,8 +2,14 @@
   "name": "AC-tech-test",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "collectCoverageFrom": [
+      "**/src/**.{js,jsx}",
+      "!**/src/index.js",
+      "!**/node_modules/**"
+    ]
+  },
   "dependencies": {
-    "chai": "^4.2.0",
     "moment": "^2.24.0",
     "node-fetch": "^2.3.0",
     "node-sass": "^4.11.0",
