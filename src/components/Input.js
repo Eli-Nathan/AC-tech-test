@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 class Input extends Component {
-
+/* Check validation errors and add classes based on their truthiness */
   render() {
     return (
       <div className={
@@ -16,6 +16,7 @@ class Input extends Component {
           className="ch-form__control-label">
           {this.props.label}
         </label>
+        { /* Check validation errors and add <span> based on their truthiness */ }
         {this.props.isInvalid &&
           <span className="ch-form__control-validation">{this.props.validationMessage}</span>
         }

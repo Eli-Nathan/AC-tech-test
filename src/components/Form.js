@@ -23,6 +23,7 @@ class Form extends Component {
     return (
       <div className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3">
         <div className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-pa--3 ch-rounded">
+        { /* Input elements */ }
           <Input
             type="number"
             id="price"
@@ -51,6 +52,7 @@ class Form extends Component {
             smallInput={true} />
           <div className="ch-form__group">
             <h5 className="ch-mb--1">Finance term</h5>
+            { /* Radio elements */ }
           <Radio
             id="oneYear"
             value={1}

@@ -6,16 +6,16 @@ class Radio extends Component {
     return (
       <>
         <input
-          id={this.props.id}
+          className="ch-reader ch-radio"
           type="radio"
+          id={this.props.id}
           name={this.props.name}
           value={this.props.value}
-          className="ch-reader ch-radio"
           onChange={this.props.action}
           defaultChecked={this.props.defaultRadio} />
         <label
-          htmlFor={this.props.id}
-          className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2">
+          className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
+          htmlFor={this.props.id}>
           {this.props.label}
         </label>
       </>

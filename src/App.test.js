@@ -9,8 +9,15 @@ import Form from './components/Form'
 import Quote from './components/Quote'
 import Schedule from './components/Schedule'
 import Vehicles from './components/Vehicles'
+import Input from './components/Input'
+import Radio from './components/Radio'
 
 configure({ adapter: new Adapter() });
+
+/*
+  Just some basic tests to see if components mount properly
+  I don't have much experience with unit testing so these tests are very basic.
+*/
 
 describe('<App />', () => {
   it('Component renders without crashing', () => {
@@ -45,16 +52,39 @@ describe('<Form />', () => {
     ReactDOM.unmountComponentAtNode(div)
   })
 
-  // it('autosets date', () => {
-  //   const props = {
-  //     date: new Date(2019-02-24T18:36:25.175Z)
-  //   },
-  //   date = mount(<Form {...props} />);
-  //   expect((date).prop('date')).toEqual(new Date(2019-02-24T18:36:25.175Z));
-  // });
+  it('has correct amount of inputs', () => {
+    const form = mount(<Form />);
+    expect(form.find('input').length).toBe(8)
+  });
 
   it('matches the snapshot', () => {
     const tree = renderer.create(<Form />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+})
+
+describe('<Input />', () => {
+  it('Successfully render input', () => {
+    const div = document.createElement('div')
+    ReactDOM.render(<Input />, div)
+    ReactDOM.unmountComponentAtNode(div)
+  })
+
+  it('matches the snapshot', () => {
+    const tree = renderer.create(<Input />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+})
+
+describe('<Radio />', () => {
+  it('Successfully render Radio', () => {
+    const div = document.createElement('div')
+    ReactDOM.render(<Radio />, div)
+    ReactDOM.unmountComponentAtNode(div)
+  })
+
+  it('matches the snapshot', () => {
+    const tree = renderer.create(<Radio />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 })

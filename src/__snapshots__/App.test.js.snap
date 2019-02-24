@@ -24,13 +24,15 @@ exports[`<App /> matches the snapshot 1`] = `
       className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-pa--3 ch-rounded"
     >
       <div
-        className="ch-form__group"
+        className="ch-form__group
+        undefined
+        undefined"
       >
         <label
           className="ch-form__control-label"
           htmlFor="price"
         >
-          Vehicle Price (£)
+          Vehicle price (£)
         </label>
         <input
           className="ch-form__control"
@@ -39,7 +41,9 @@ exports[`<App /> matches the snapshot 1`] = `
         />
       </div>
       <div
-        className="ch-form__groupfalse"
+        className="ch-form__group
+        false
+        undefined"
       >
         <label
           className="ch-form__control-label"
@@ -47,11 +51,6 @@ exports[`<App /> matches the snapshot 1`] = `
         >
           Desposit amount (£)
         </label>
-        <span
-          className="ch-form__control-validation"
-        >
-          Deposit must be at least 15% of the vehicle price, i.e. £NaN
-        </span>
         <input
           className="ch-form__control"
           id="deposit"
@@ -59,7 +58,9 @@ exports[`<App /> matches the snapshot 1`] = `
         />
       </div>
       <div
-        className="ch-form__group"
+        className="ch-form__group
+        undefined
+        undefined"
       >
         <label
           className="ch-form__control-label"
@@ -74,7 +75,9 @@ exports[`<App /> matches the snapshot 1`] = `
         />
       </div>
       <div
-        className="ch-form__group ch-display--inline-block ch-mr--2"
+        className="ch-form__group
+        undefined
+         ch-display--inline-block ch-mr--2"
       >
         <label
           className="ch-form__control-label"
@@ -90,7 +93,9 @@ exports[`<App /> matches the snapshot 1`] = `
         />
       </div>
       <div
-        className="ch-form__group ch-display--inline-block"
+        className="ch-form__group
+        undefined
+         ch-display--inline-block ch-mr--2"
       >
         <label
           className="ch-form__control-label"
@@ -123,7 +128,7 @@ exports[`<App /> matches the snapshot 1`] = `
           value={1}
         />
         <label
-          className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact"
+          className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
           htmlFor="oneYear"
         >
           1 year
@@ -137,22 +142,22 @@ exports[`<App /> matches the snapshot 1`] = `
           value={2}
         />
         <label
-          className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
+          className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
           htmlFor="twoYears"
         >
           2 years
         </label>
         <input
           className="ch-reader ch-radio"
-          id="threeYears"
+          id="oneYear"
           name="financeTerm"
           onChange={[Function]}
           type="radio"
           value={3}
         />
         <label
-          className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
-          htmlFor="threeYears"
+          className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
+          htmlFor="oneYear"
         >
           3 years
         </label>
@@ -181,13 +186,15 @@ exports[`<Form /> matches the snapshot 1`] = `
     className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-pa--3 ch-rounded"
   >
     <div
-      className="ch-form__group"
+      className="ch-form__group
+        undefined
+        undefined"
     >
       <label
         className="ch-form__control-label"
         htmlFor="price"
       >
-        Vehicle Price (£)
+        Vehicle price (£)
       </label>
       <input
         className="ch-form__control"
@@ -196,7 +203,9 @@ exports[`<Form /> matches the snapshot 1`] = `
       />
     </div>
     <div
-      className="ch-form__groupundefined"
+      className="ch-form__group
+        undefined
+        undefined"
     >
       <label
         className="ch-form__control-label"
@@ -204,11 +213,6 @@ exports[`<Form /> matches the snapshot 1`] = `
       >
         Desposit amount (£)
       </label>
-      <span
-        className="ch-form__control-validation"
-      >
-        Deposit must be at least 15% of the vehicle price, i.e. £NaN
-      </span>
       <input
         className="ch-form__control"
         id="deposit"
@@ -216,7 +220,9 @@ exports[`<Form /> matches the snapshot 1`] = `
       />
     </div>
     <div
-      className="ch-form__group"
+      className="ch-form__group
+        undefined
+        undefined"
     >
       <label
         className="ch-form__control-label"
@@ -231,7 +237,9 @@ exports[`<Form /> matches the snapshot 1`] = `
       />
     </div>
     <div
-      className="ch-form__group ch-display--inline-block ch-mr--2"
+      className="ch-form__group
+        undefined
+         ch-display--inline-block ch-mr--2"
     >
       <label
         className="ch-form__control-label"
@@ -247,7 +255,9 @@ exports[`<Form /> matches the snapshot 1`] = `
       />
     </div>
     <div
-      className="ch-form__group ch-display--inline-block"
+      className="ch-form__group
+        undefined
+         ch-display--inline-block ch-mr--2"
     >
       <label
         className="ch-form__control-label"
@@ -280,7 +290,7 @@ exports[`<Form /> matches the snapshot 1`] = `
         value={1}
       />
       <label
-        className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact"
+        className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
         htmlFor="oneYear"
       >
         1 year
@@ -294,22 +304,22 @@ exports[`<Form /> matches the snapshot 1`] = `
         value={2}
       />
       <label
-        className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
+        className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
         htmlFor="twoYears"
       >
         2 years
       </label>
       <input
         className="ch-reader ch-radio"
-        id="threeYears"
+        id="oneYear"
         name="financeTerm"
         onChange={[Function]}
         type="radio"
         value={3}
       />
       <label
-        className="ch-display--block sm:ch-display--inline sm:ch-ml--2 ch-mb--1 ch-radio__label ch-radio__label--compact"
-        htmlFor="threeYears"
+        className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
+        htmlFor="oneYear"
       >
         3 years
       </label>
@@ -342,6 +352,21 @@ exports[`<Header /> matches the snapshot 1`] = `
 </div>
 `;
 
+exports[`<Input /> matches the snapshot 1`] = `
+<div
+  className="ch-form__group
+        undefined
+        undefined"
+>
+  <label
+    className="ch-form__control-label"
+  />
+  <input
+    className="ch-form__control"
+  />
+</div>
+`;
+
 exports[`<Quote /> matches the snapshot 1`] = `
 <div>
   <h3
@@ -353,6 +378,18 @@ exports[`<Quote /> matches the snapshot 1`] = `
     For your interest free loan, you will borrow £NaN over undefined years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £undefined and the final payment is inclusive of a £undefined
   </p>
 </div>
+`;
+
+exports[`<Radio /> matches the snapshot 1`] = `
+Array [
+  <input
+    className="ch-reader ch-radio"
+    type="radio"
+  />,
+  <label
+    className="ch-display--block sm:ch-display--inline ch-radio__label ch-mb--1 ch-radio__label--compact ch-mr--2"
+  />,
+]
 `;
 
 exports[`<Schedule /> matches the snapshot 1`] = `
