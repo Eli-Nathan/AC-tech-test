@@ -18,7 +18,7 @@ class App extends Component {
       arrangementFee: 88,
       completionFee: 20,
       termLength: 1,
-      depositError: false,
+      isInvalid: false,
       data: []
     }
     // Bind `this` to get data function
@@ -95,7 +95,7 @@ class App extends Component {
         price: price,
         deposit: deposit,
         date: deliveryDate,
-        depositError: false,
+        isInvalid: false,
         arrangementFee: arrangement,
         completionFee: completion,
         formSubmitted: true,
@@ -108,7 +108,7 @@ class App extends Component {
       this.setState({
         price: price,
         date: new Date(),
-        depositError: true
+        isInvalid: true
       })
     }
   }
@@ -121,12 +121,12 @@ class App extends Component {
         { /* Form component */ }
         <Form
           submit={this.calculateLoan}
-          switch={this.changeTerm}
+          switchRadio={this.changeTerm}
           price={this.state.price}
-          depositError={this.state.depositError} />
+          isInvalid={this.state.isInvalid} />
         { /* Show the following if form is submitted */ }
         {this.state.formSubmitted > 0 &&
-          <output>
+          <div>
             <div className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3">
               { /* Quote component */ }
               <Quote
@@ -150,7 +150,7 @@ class App extends Component {
             <Vehicles
               data={this.state.data}
               monthlyMax={this.state.monthlyMax} />
-          </output>
+          </div>
         }
       </div>
     )

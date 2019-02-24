@@ -45,6 +45,14 @@ describe('<Form />', () => {
     ReactDOM.unmountComponentAtNode(div)
   })
 
+  // it('autosets date', () => {
+  //   const props = {
+  //     date: new Date(2019-02-24T18:36:25.175Z)
+  //   },
+  //   date = mount(<Form {...props} />);
+  //   expect((date).prop('date')).toEqual(new Date(2019-02-24T18:36:25.175Z));
+  // });
+
   it('matches the snapshot', () => {
     const tree = renderer.create(<Form />).toJSON();
     expect(tree).toMatchSnapshot();
