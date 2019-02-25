@@ -4,13 +4,33 @@ class Vehicles extends Component {
   constructor(props) {
     super(props)
     this.renderVehicles = this.renderVehicles.bind(this)
+    this.state = {
+      cashBuying: false
+    }
   }
 
   renderVehicles = () => {
-    let vehicles = "Sorry, no vehicles found"
-    let data = this.props.data.filter(d => d.salesInfo.pricing.monthlyPayment <= this.props.monthlyMax)
+    let data
+    if(this.props.monthlyMax === 0) {
+      return (
+        <div className="sm:ch-col--12 ch-mb--4">
+          <div className="ch-alert ch-alert--danger">
+            It looks like you are looking to buy a car outright. Please adjust your price and deposit amounts to show vehicles you can afford based on monthly payments
+          </div>
+        </div>
+      )
+    }
+    else {
+      data = this.props.data.filter(d => d.salesInfo.pricing.monthlyPayment <= this.props.monthlyMax)
+    }
     if(data.length === 0) {
-      return vehicles
+      return (
+        <div className="sm:ch-col--12 ch-mb--4">
+          <div className="ch-alert ch-alert--danger">
+            Sorry, no we cannot show any vehicles because your monthly payments are too low based on the values entered.
+          </div>
+        </div>
+      )
     }
 
     if(data.length > 6) {

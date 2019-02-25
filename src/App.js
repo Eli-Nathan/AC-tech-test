@@ -140,10 +140,9 @@ class App extends Component {
               <Schedule
                 termLength={this.state.termLength}
                 monthlyMax={this.state.monthlyMax}
-                arrangementFee={this.state.completionFee}
+                arrangementFee={this.state.arrangementFee}
                 completionFee={this.state.completionFee}
                 date={this.state.date} />
-
             </div>
 
             { /* Vehicles component */ }
