@@ -67,7 +67,7 @@ class Form extends Component {
             name="financeTerm"
             label="2 years" />
           <Radio
-            id="oneYear"
+            id="threeYears"
             value={3}
             action={() => this.props.switchRadio(3)}
             name="financeTerm"
