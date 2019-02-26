@@ -40,7 +40,7 @@ class Vehicles extends Component {
     return data.map(vehicle => (
       <div className="sm:ch-col--6 md:ch-col--4 ch-mb--2 vehicleCard" key={vehicle.stockReference}>
         <div className="ch-bg--white ch-ba--1 ch-bc--grey-2 ch-rounded">
-          <a href={vehicle.url} className="ch-color--ac-black ch-text-decoration--none">
+          <a href={"https://arnoldclark.com" + vehicle.url} className="ch-color--ac-black ch-text-decoration--none">
             <div>
               <img
                 src={vehicle.photos.length === 0 ? "https://www.arnoldclark.com/assets/application/no-images-vehicle-8c4df08470af32dee8f1a3ea091e72cbf2bac4225054b1844de0880d1bf766ae.svg" : vehicle.photos[0]}
