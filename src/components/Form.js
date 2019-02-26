@@ -33,7 +33,7 @@ class Form extends Component {
             id="deposit"
             label="Desposit amount (£)"
             isInvalid={this.props.isInvalid}
-            validationMessage={`Deposit must be at least 15% of the vehicle price, i.e. £${(15 / 100 ) * this.props.price}`} />
+            validationMessage={`Deposit must be at least 15% of the vehicle price, i.e. £${Math.ceil((15 / 100) * this.props.price)}`} />
           <Input
             type="date"
             id="deliveryDate"
