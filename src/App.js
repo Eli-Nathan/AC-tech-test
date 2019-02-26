@@ -4,7 +4,7 @@ import Vehicles from './components/Vehicles'
 import Schedule from './components/Schedule'
 import Header from './components/Header'
 import Form from './components/Form'
-import './app.scss'
+import './App.scss'
 
 class App extends Component {
   constructor(props) {
@@ -100,6 +100,12 @@ class App extends Component {
         completionFee: completion,
         formSubmitted: true,
         monthlyMax: parseInt((price - deposit) / (this.state.termLength*12))
+      }, () => {
+        let quoteDiv = document.querySelector("#quote")
+        quoteDiv.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        })
       })
     }
 
@@ -127,7 +133,7 @@ class App extends Component {
         { /* Show the following if form is submitted */ }
         {this.state.formSubmitted > 0 &&
           <div>
-            <div className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3">
+            <div id="quote" className="sm:ch-col--10 sm:ch-col--offset-1 md:ch-col--8 md:ch-col--offset-2 lg:ch-col--6 lg:ch-col--offset-3">
               { /* Quote component */ }
               <Quote
                 price={this.state.price}

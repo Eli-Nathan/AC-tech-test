@@ -36,7 +36,7 @@ class Schedule extends Component {
 
   render() {
     return (
-      <div>
+      <div id="schedule">
         <h3 className="ch-mt--4">Payment Schedule</h3>
         <table
           className="ch-table ch-table--bordered ch-table--hover ch-table--striped ch-mt--2"
