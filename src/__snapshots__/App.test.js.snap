@@ -375,7 +375,8 @@ exports[`<Quote /> matches the snapshot 1`] = `
     Your quote
   </h3>
   <p>
-    For your interest free loan, you will borrow £NaN over undefined years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £undefined and the final payment is inclusive of a £undefined
+    For your interest free loan, you will borrow £NaN over undefined years. Your first payment will be due on the first Monday of the month following the delivery date. The first payment listed below is inclusive of an £undefined arrangement fee and the final payment is inclusive of a £undefined
+     completion fee
   </p>
 </div>
 `;
@@ -393,7 +394,9 @@ Array [
 `;
 
 exports[`<Schedule /> matches the snapshot 1`] = `
-<div>
+<div
+  id="schedule"
+>
   <h3
     className="ch-mt--4"
   >
